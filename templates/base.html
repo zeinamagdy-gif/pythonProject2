@@ -1,0 +1,9 @@
+// Retrieve the page collection, and then set the second page to be active.
+try {
+    const pages = await report.getPages();
+    await pages[3].setActive();
+    console.log("Active page was set to: \"" + pages[3].displayName + "\"");
+}
+catch (errors) {
+    console.log(errors);
+}
