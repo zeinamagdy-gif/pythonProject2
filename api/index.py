@@ -1,6 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+import os
+my_var = os.environ.get('MY_VAR')
 app = Flask(__name__)
+from dotenv import load_dotenv
+load_dotenv()
 app.secret_key = 'secret'
 
 users = {
@@ -61,7 +64,15 @@ user_data = {
     }
 
 }
-
+@app.route('/welcome')
+def welcome():
+    return "Welcome page!"  # ✅ This is fine
+@app.route("/json")
+def json_data():
+    return jsonify({"msg": "ok"})
+@app.route("/html")
+def html():
+    return render_template("dashboard.html")
 # Power BI page URLs (replace pageName values with your actual Power BI page names)
 POWERBI_PAGES = {'homepage': 'https://app.powerbi.com/reportEmbed?reportId=54a882f8-a907-44e5-a648-febb93b00fa3&pageName=54d03fd1b6b893b34049&autoAuth=true&ctid=736ee586-9e83-43c4-85b0-6368fca06b45',
                  'readme': 'https://app.powerbi.com/reportEmbed?reportId=54a882f8-a907-44e5-a648-febb93b00fa3&pageName=6fe92debf7ede8d4d65a&autoAuth=true&ctid=736ee586-9e83-43c4-85b0-6368fca06b45',
