@@ -163,12 +163,9 @@ def profile():
         return "User profile not found"
 
     return render_template('profile.html', user=user)
+handler = app
 
 
 
 
 
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
